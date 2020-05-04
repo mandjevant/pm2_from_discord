@@ -55,7 +55,7 @@ class BotSquadCog(commands.Cog):
         text = ""
 
         for value in description:
-            text += value+"\n"
+            text += value + "\n"
 
             if len(text) > 1800:
                 try:
@@ -81,7 +81,13 @@ class BotSquadCog(commands.Cog):
 
     @staticmethod
     def replace(text):
-        return lambda s: re.sub(r'[─┼┌┬└┘┐┤┴├]', '', text)
+        bad_chars = {'┼': '', '┌': '', '┬': '', '└': '', '┘': '', '─': '',
+                     '┐': '', '┤': '', '┴': '', '├': '', ']': '', '[': ''}
+
+        for original, replacement in bad_chars.items():
+            text = text.replace(original, replacement)
+
+        return text
 
 
 def setup(bot):
