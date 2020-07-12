@@ -64,10 +64,11 @@ class BotSquadCog(commands.Cog):
                 except Exception as e:
                     sentry_sdk.capture_exception(e)
 
-        try:
-            await ctx.send(f"```Java\n{text}\n```")
-        except Exception as e:
-            sentry_sdk.capture_exception(e)
+        if text != "":
+            try:
+                await ctx.send(f"```Java\n{text}\n```")
+            except Exception as e:
+                sentry_sdk.capture_exception(e)
 
     @run.error
     async def run_error(self, ctx, err):
