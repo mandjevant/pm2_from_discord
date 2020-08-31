@@ -1,13 +1,9 @@
 import spur
 import os
 
-on_message_users = {204184798200201216: r'.*(pim|076 | 076|204184798200201216|terminator076|terminator)\b.*'}
+# Populate as {discordID: regex, discordID: regex}
+on_message_users = {}
 path = os.path.dirname(os.path.abspath(__file__))
-av_users = """Pim dankmemes | parameter: `pim`
-Bot-Daemon | parameter: `daemon` NOT WORKING
-Pim main dm AWS | parameter: `pimaws`
-Batman AWS | parameter: `batmanaws`
-Catfish AWS | parameter: `catfishaws`"""
 
 
 def create_conn(hostname, username, private_key_file):

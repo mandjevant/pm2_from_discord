@@ -24,9 +24,11 @@ class BotSquadCog(commands.Cog):
         if isinstance(err, commands.CheckFailure):
             await ctx.send("Sorry, you do not have permission to use this command.")
         elif isinstance(err, commands.MissingRequiredArgument):
-            await ctx.send(f"User is a required argument that is missing.\nExisting users are:\n{av_users}")
+            await ctx.send(f"User is a required argument that is missing.\n"
+                           f"Existing users are:\n{self.conf.get('global', 'av_users')}")
         elif isinstance(err, commands.BadArgument):
-            await ctx.send(f"Login for user not found. Please input an existing user.\nExisting users are:\n{av_users}")
+            await ctx.send(f"Login for user not found. Please input an existing user.\n"
+                           f"Existing users are:\n{self.conf.get('global', 'av_users')}")
         else:
             await ctx.send(f"Unknown error occurred.\n{str(err)}")
             sentry_sdk.capture_message(str(err))

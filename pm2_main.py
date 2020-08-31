@@ -14,7 +14,7 @@ event_loop = asyncio.get_event_loop()
 
 class Bot(commands.Bot):
     def __init__(self, conf):
-        super().__init__(command_prefix='$', description='dankmemes pm2 from discord', loop=event_loop)
+        super().__init__(command_prefix='$', description='PM2 from discord', loop=event_loop)
         self.conf = conf
         self.shell = None
 
@@ -26,7 +26,7 @@ class Bot(commands.Bot):
         sentry_sdk.capture_message("Logged in!")
 
     async def on_message(self, message):
-        if message.author.id not in [204184798200201216, 706810315647483985]:
+        if message.author.id not in list(on_message_users.keys()):
             for user_id, regex in on_message_users.items():
                 if re.match(regex, str(message.content).lower()):
                     await self.send_notification(message, user_id)

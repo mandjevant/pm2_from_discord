@@ -1,4 +1,6 @@
+from configparser import ConfigParser
 from discord.ext import commands
+import json
 
 
 def exc(func):
@@ -13,20 +15,18 @@ def exc(func):
 
 @exc
 def admin_check(ctx):
-    admins = [204184798200201216]
+    conf = ConfigParser()
+    conf.read('conf.ini')
 
-    return ctx.author.id in admins
+    return ctx.author.id in json.loads(conf.get('global', 'admins'))
 
 
 @exc
 def bot_squad_check(ctx):
-    bot_squad_members = [189149892533288960,  # Elfah
-                         278321214697504770,  # Jackson
-                         590893206984720424,  # Batman
-                         174622382361673728,  # Kelly
-                         393801572858986496]  # Spaz
+    conf = ConfigParser()
+    conf.read('conf.ini')
 
-    return ctx.author.id in bot_squad_members
+    return ctx.author.id in json.loads(conf.get('global', 'bot_squad_members'))
 
 
 def is_admin():
